@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Sistema de Pagos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 400px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        select, input[type="text"], input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="submit"] {
+            background: #28a745;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background: #218838;
+        }
+
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.9em;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Realizar Pago</h2>
+        <form action="procesar_pago.php" method="post">
+            <label for="metodo">Método de pago:</label>
+            <select name="metodo" id="metodo" required>
+                <option value="tarjeta">Tarjeta de Crédito</option>
+                <option value="efectivo">Efectivo</option>
+                <option value="nequi">Nequi</option>
+            </select>
+
+            <label for="monto">Monto ($COP):</label>
+            <input type="text" name="monto" id="monto" required placeholder="Ej: 50.000">
+
+            <input type="submit" value="Pagar">
+        </form>
+        <div class="footer">
+            Sistema de pagos con patrón Strategy
+        </div>
+    </div>
+
+    <script>
+        const montoInput = document.getElementById('monto');
+
+        montoInput.addEventListener('input', () => {
+            let valor = montoInput.value.replace(/\D/g, '');
+            valor = new Intl.NumberFormat('es-CO').format(valor);
+            montoInput.value = valor;
+        });
+    </script>
+</body>
+</html>
